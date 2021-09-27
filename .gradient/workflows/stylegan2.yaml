@@ -6,7 +6,7 @@ on:
 jobs:
   CloneRepo:
     resources:
-      instance-type: P5000
+      instance-type: C3
     outputs:
      stylegan2:
         type: volume
@@ -15,9 +15,9 @@ jobs:
       # url: https://github.com/gradient-ai/stylegan2.git
       url: context.event.github.url
       ref: context.event.github.ref
-  Training:
+  Preparing:
     resources:
-      instance-type: P5000
+      instance-type: C3
     needs:
       - CloneRepo
     inputs:
@@ -30,9 +30,24 @@ jobs:
     uses: script@v1
     with:
       script: |-
-        ls
         cd inputs/stylegan2
-        ls
-        python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f \
-        --dataset=ffhq --mirror-augment=true
+        pip install requests
+      image: tensorflow/tensorflow:1.14.0-gpu-py3
+  Training:
+    resources:
+      instance-type: P5000
+    needs:
+      - Preparing
+    inputs:
+      stylegan2: CloneRepo.outputs.stylegan2
+    outputs:
+      generatedFaces:
+        type: dataset
+        with:
+          ref: demo-dataset
+    uses: script@v1
+    with:
+      script: |-
+      python run_generator.py generate-images --network=gdrive:networks/stylegan2-car-config-f.pkl \
+       --seeds=6000-6002 --truncation-psi=0.5
       image: tensorflow/tensorflow:1.14.0-gpu-py3
