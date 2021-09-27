@@ -31,7 +31,7 @@ jobs:
     with:
       script: |-
         ls
-        cd inputs
+        cd inputs/stylegan2
         ls
         python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f \
         --dataset=ffhq --mirror-augment=true
