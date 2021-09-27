@@ -52,7 +52,7 @@ jobs:
         type: dataset
         with:
           ref: main
-    uses: script@v2
+    uses: script@v1
     with:
       script: |-
         python run_generator.py generate-images \
