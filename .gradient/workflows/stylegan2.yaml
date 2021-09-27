@@ -6,7 +6,7 @@ on:
 jobs:
   CloneRepo:
     resources:
-      instance-type: P5000
+      instance-type: RTX4000
     outputs:
      stylegan2:
         type: volume
@@ -30,7 +30,7 @@ jobs:
     uses: script@v1
     with:
       script: |-
-        ls
+        cd inputs
         python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f \
         --dataset=ffhq --mirror-augment=true
       image: tensorflow/tensorflow:1.14.0-gpu-py3
