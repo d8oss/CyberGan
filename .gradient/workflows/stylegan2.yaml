@@ -32,22 +32,6 @@ jobs:
       script: |-
         cd inputs/stylegan2
         pip install requests
-      image: tensorflow/tensorflow:1.14.0-gpu-py3
-  Training:
-    resources:
-      instance-type: P5000
-    needs:
-      - Preparing
-    inputs:
-      stylegan2: CloneRepo.outputs.stylegan2
-    outputs:
-      generatedFaces:
-        type: dataset
-        with:
-          ref: demo-dataset
-    uses: script@v1
-    with:
-      script: |-
         python run_generator.py generate-images --network=gdrive:networks/stylegan2-car-config-f.pkl \
         --seeds=6000-6002 --truncation-psi=0.5
       image: tensorflow/tensorflow:1.14.0-gpu-py3
