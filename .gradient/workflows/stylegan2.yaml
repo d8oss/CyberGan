@@ -17,7 +17,7 @@ jobs:
       ref: context.event.github.ref
   Preparing:
     resources:
-      instance-type: C3
+      instance-type: P5000
     needs:
       - CloneRepo
     inputs:
@@ -32,6 +32,7 @@ jobs:
       script: |-
         cd inputs/stylegan2
         pip install requests
+        pip install pillow
         python run_generator.py generate-images --network=gdrive:networks/stylegan2-car-config-f.pkl \
         --seeds=6000-6002 --truncation-psi=0.5
       image: tensorflow/tensorflow:1.14.0-gpu-py3
