@@ -40,3 +40,24 @@ jobs:
           --truncation-psi=0.5 \
           --result-dir=/outputs/generatedFaces
       image: tensorflow/tensorflow:1.14.0-gpu-py3
+  Training:
+    resources:
+      instance-type: Free-RTX4000
+    needs:
+      - CloneRepo
+    inputs:
+      stylegan2: CloneRepo.outputs.stylegan2
+    outputs:
+      generatedFaces:
+        type: dataset
+        with:
+          ref: main
+    uses: script@v1
+    with:
+      script: |-
+        python run_generator.py generate-images \
+          --network=gdrive:networks/stylegan2-ffhq-config-f.pkl \
+          --seeds=6600-6605 \
+          --truncation-psi=0.5 \
+          --result-dir=/outputs/generatedFaces
+      image: tensorflow/tensorflow:1.14.0-gpu-py3
