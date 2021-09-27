@@ -48,6 +48,6 @@ jobs:
     uses: script@v1
     with:
       script: |-
-      python run_generator.py generate-images --network=gdrive:networks/stylegan2-car-config-f.pkl \
-       --seeds=6000-6002 --truncation-psi=0.5
+        python run_generator.py generate-images --network=gdrive:networks/stylegan2-car-config-f.pkl \
+        --seeds=6000-6002 --truncation-psi=0.5
       image: tensorflow/tensorflow:1.14.0-gpu-py3
