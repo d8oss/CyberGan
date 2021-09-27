@@ -30,7 +30,9 @@ jobs:
     uses: script@v1
     with:
       script: |-
+        ls
         cd inputs
+        ls
         python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f \
         --dataset=ffhq --mirror-augment=true
       image: tensorflow/tensorflow:1.14.0-gpu-py3
