@@ -51,7 +51,7 @@ jobs:
       generatedFaces:
         type: dataset
         with:
-          ref: main
+          ref: demo-dataset
     uses: script@v1
     with:
       script: |-
