@@ -33,6 +33,5 @@ jobs:
         cd inputs/stylegan2
         pip install requests
         pip install pillow
-        python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f \
-  	    --dataset=yebenya --mirror-augment=true
+        python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f --dataset=yebenya --mirror-augment=true
       image: tensorflow/tensorflow:1.14.0-gpu-py3
