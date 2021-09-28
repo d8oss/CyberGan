@@ -12,7 +12,7 @@ jobs:
         type: volume
     uses: git-checkout@v1
     with:
-      # url: https://github.com/gradient-ai/stylegan2.git
+      url: https://github.com/gradient-ai/stylegan2.git
       url: context.event.github.url
       ref: context.event.github.ref
   Preparing:
@@ -33,5 +33,5 @@ jobs:
         cd inputs/stylegan2
         pip install requests
         pip install pillow
-        python run_training.py --num-gpus=8 --data-dir=~/datasets --config=config-f --dataset=yebenya --mirror-augment=true
+        python run_training.py --num-gpus=8 --data-dir=datasets --config=config-f --dataset=yebenya --mirror-augment=true
       image: tensorflow/tensorflow:1.14.0-gpu-py3
