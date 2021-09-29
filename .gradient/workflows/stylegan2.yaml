@@ -30,7 +30,7 @@ jobs:
     uses: script@v1
     with:
       script: |-
-        ls
+        # ls
         cd inputs/stylegan2
         pip install requests
         pip install pillow
